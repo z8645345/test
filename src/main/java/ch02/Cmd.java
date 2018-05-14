@@ -3,6 +3,7 @@ public class Cmd {
 	private boolean helpFlag;
 	private boolean versionFlag;
 	private String cpOption;
+	private String xJreOption;
 	private String clazz;
 	private String[] args;
 	
