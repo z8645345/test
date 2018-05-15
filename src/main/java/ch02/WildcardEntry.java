@@ -3,10 +3,10 @@ package ch02;
 /**
  * 和CompositeEntry一样，*结尾匹配，例如：D:/java/jar/*
  */
-public class WildcardEntry implements Entry {
+public class WildcardEntry extends CompositeEntry {
 	
 	public WildcardEntry(String path) {
-		
+		super.
 	}
 
 	@Override
