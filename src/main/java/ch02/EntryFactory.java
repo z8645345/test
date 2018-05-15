@@ -15,7 +15,7 @@ public class EntryFactory {
 			return new CompositeEntry(path);
 		}
 		if (path.endsWith("*")) {
-			return new WildcardEntry(path);
+			return new CompositeEntry(path, true);
 		}
 		if (path.endsWith(".jar") || path.endsWith(".JAR") 
 				|| path.endsWith(".zip") || path.endsWith(".ZIP")) {
