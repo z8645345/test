@@ -2,6 +2,7 @@ package ch01;
 public class Cmd {
 	private boolean helpFlag;
 	private boolean versionFlag;
+	private String xJreOption;
 	private String cpOption;
 	private String clazz;
 	private String[] args;
