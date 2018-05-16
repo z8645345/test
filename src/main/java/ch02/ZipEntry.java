@@ -18,7 +18,7 @@ public class ZipEntry implements Entry {
 	
 	public ZipEntry(String path) {
 		File absDirPath = new File(path);
-		this.absPath = absDirPath.toString();
+		this.absPath = absDirPath.getAbsolutePath();
 	}
 
 	/**
@@ -59,26 +59,4 @@ public class ZipEntry implements Entry {
 	public String string() {
 		return this.absPath;
 	}
-	
-	public static void main(String[] args) {
-		ZipEntry ze = new ZipEntry("D:\\zengjia/zengjia.zip");
-		try {
-			byte[] bs = ze.readClass("test.class");
-			if (bs == null) {
-				System.out.println("未找到class");
-			} else {
-				for (byte b : bs) {
-					String hex = Integer.toHexString(b & 0xFF);
-		            if (hex.length() == 1)
-		            {
-		                hex = '0' + hex;
-		            }
-		            System.out.print(hex.toUpperCase() + " ");
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

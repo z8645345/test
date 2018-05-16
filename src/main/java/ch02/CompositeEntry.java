@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class CompositeEntry implements Entry {
 	
-	private List<Entry> entryList;
+	private List<Entry> entryList = new ArrayList<>();
 	
 	public CompositeEntry(String pathList) {
 		this(pathList, false);

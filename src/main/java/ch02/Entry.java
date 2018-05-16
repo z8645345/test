@@ -1,7 +1,5 @@
 package ch02;
 
-import java.io.File;
-
 /**
  * 类路径
  * @author zengjia
@@ -12,7 +10,7 @@ public interface Entry {
 	/**
 	 * 当前操作系统文件路径分隔符
 	 */
-	public static final String PATH_LIST_SEPARATOR = File.separator;
+	public static final String PATH_LIST_SEPARATOR = ";";
 	
 	/**
 	 * 寻找和加载class文件

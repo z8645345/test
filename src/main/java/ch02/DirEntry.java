@@ -14,7 +14,7 @@ public class DirEntry implements Entry {
 	
 	public DirEntry(String path) {
 		File absDirPath = new File(path);
-		this.absDir = absDirPath.toString();
+		this.absDir = absDirPath.getAbsolutePath();
 	}
 
 	/**
@@ -24,16 +24,21 @@ public class DirEntry implements Entry {
 	 */
 	public byte[] readClass(String className) throws Exception {
 		File file = new File(this.absDir + "/" + className);
-		try (FileInputStream fis = new FileInputStream(file);
-				ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);) {
-			byte[] b = new byte[1000];  
-            int n;  
-            while ((n = fis.read(b)) != -1) {  
-                bos.write(b, 0, n);  
-            }
-            return bos.toByteArray();
-		} catch (Exception e) {
-			throw e;
+		System.out.println(file.getAbsolutePath());
+		if (file.exists()) {
+			try (FileInputStream fis = new FileInputStream(file);
+					ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);) {
+				byte[] b = new byte[1000];  
+	            int n;  
+	            while ((n = fis.read(b)) != -1) {  
+	                bos.write(b, 0, n);  
+	            }
+	            return bos.toByteArray();
+			} catch (Exception e) {
+				throw e;
+			}
+		} else {
+			return null;
 		}
 	}
 
@@ -45,21 +50,4 @@ public class DirEntry implements Entry {
 		return this.absDir;
 	}
 	
-	public static void main(String[] args) {
-		DirEntry de = new DirEntry("D:\\zengjia");
-		try {
-			byte[] bs = de.readClass("Cmd.class");
-			for (byte b : bs) {
-				String hex = Integer.toHexString(b & 0xFF);
-	            if (hex.length() == 1)
-	            {
-	                hex = '0' + hex;
-	            }
-	            System.out.print(hex.toUpperCase() + " ");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }

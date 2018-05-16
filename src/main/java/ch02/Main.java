@@ -1,6 +1,6 @@
 package ch02;
 
-import ch01.Cmd;
+import ch02.Cmd;
 
 public class Main {
 	

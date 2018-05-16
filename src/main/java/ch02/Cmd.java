@@ -32,10 +32,17 @@ public class Cmd {
 				int i = 0;
 				if (args0.equals("-classpath") || args0.equals("-cp")) {
 					this.cpOption = args[1];
+					if ("-xJreOption".equals(args[2])) {
+						xJreOption = args[3];
+						i = 4;
+					} else {
+						i = 2;
+					}
+				} else if ("-xJreOption".equals(args0)) {
+					xJreOption = args[1];
 					i = 2;
 				}
 				this.clazz = args[i];
-				this.clazz = args[i + 1];
 				this.args = new String[args.length - (i + 1)];
 				for (int j = 0; j < this.args.length; j ++) {
 					this.args[j] = args[i + 1 + j];	
@@ -53,6 +60,25 @@ public class Cmd {
 		for (String arg : this.args) {
 			argsStr.append(arg).append(", ");
 		}
-		System.out.println("classpath:" + this.cpOption + " class:" + this.clazz + " args:" +  argsStr.substring(0, argsStr.length() - 2));	
+		System.out.println("classpath:" + this.cpOption + " class:" + this.clazz + " xJreOption:" + this.xJreOption + " args:" +  argsStr.substring(0, argsStr.length() - 2));
+		try {
+			Classpath classpath = new Classpath(xJreOption, cpOption);
+			byte[] data = classpath.readClass(this.clazz);
+			if (data == null) {
+				System.err.println("not found class: " + this.clazz);
+			} else {
+				for (byte b : data) {
+					String hex = Integer.toHexString(b & 0xFF);
+		            if (hex.length() == 1)
+		            {
+		                hex = '0' + hex;
+		            }
+		            System.out.print(hex.toUpperCase() + " ");
+				}
+			}
+		} catch (Exception e) {
+			System.err.println("start final");
+			e.printStackTrace();
+		}
 	}
 }

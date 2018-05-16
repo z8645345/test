@@ -2,6 +2,9 @@ package ch02;
 
 import java.io.File;
 
+/**
+ * 类加载路径
+ */
 public class Classpath {
 
 	private Entry bootClasspath;
@@ -53,6 +56,13 @@ public class Classpath {
 		return true;
 	}
 	
+	/**
+	 * 读取class文件
+	 * 读取顺序bootClasspath、extClasspath、userClasspath
+	 * @param className
+	 * @return
+	 * @throws Exception
+	 */
 	public byte[] readClass(String className) throws Exception {
 		className = className + ".class";
 		byte[] data = this.bootClasspath.readClass(className);
