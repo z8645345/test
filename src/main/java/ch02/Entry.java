@@ -8,7 +8,7 @@ package ch02;
 public interface Entry {
 
 	/**
-	 * 当前操作系统文件路径分隔符
+	 * 分隔符
 	 */
 	public static final String PATH_LIST_SEPARATOR = ";";
 	

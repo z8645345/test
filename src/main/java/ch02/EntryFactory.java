@@ -7,6 +7,14 @@ public class EntryFactory {
 
 	/**
 	 * 根据参数创建不同类型的Entry
+	 * 如果多个路径使用;隔开使用CompositeEntry(path)（其中每个的都是*通配）
+	 * 如果使用*通配使用CompositeEntry(path)
+	 * 如果是.jar或者.zip结尾的使用ZipEntry(path)
+	 * 其他情况使用DirEntry(path)
+	 * com.zengjia.test.*;com.zengjia.test1.* 使用CompositeEntry(path)
+	 * com.zengjia.test.*使用CompositeEntry(path, true)
+	 * com.zengjia.test.a.jar/a.zip使用ZipEntry(path)
+	 * com.zengjia.test使用DirEntry(path)
 	 * @param path
 	 * @return Entry对象
 	 */

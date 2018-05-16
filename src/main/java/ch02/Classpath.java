@@ -18,6 +18,13 @@ public class Classpath {
 		this.parseUserClsspath(cpOption);
 	}
 	
+	/***
+	 * 设置bootClasspath和extClasspath
+	 * 将系统运行环境下的classpath的lib下面所有jar全部设置到bootClasspath中
+	 * 将系统运行环境下的classpath的lib/ext下面所有jar全部设置到bootClasspath中
+	 * @param jreOption
+	 * @throws Exception
+	 */
 	private void parseBootAndExtClasspath(String jreOption) throws Exception {
 		String jreDir = getJreDir(jreOption);
 		String jreLibPath = jreDir + "/lib/*";
@@ -27,6 +34,11 @@ public class Classpath {
 		this.extClasspath = EntryFactory.getEntry(jreExtPath);
 	}
 	
+	/**
+	 * 将用户指定的classpath的所有jar全部这是到userClasspath
+	 * @param cpOption
+	 * @throws Exception
+	 */
 	private void parseUserClsspath(String cpOption) throws Exception {
 		if (cpOption == null || "".equals(cpOption)) {
 			cpOption = ".";
@@ -34,6 +46,15 @@ public class Classpath {
 		this.userClasspath = EntryFactory.getEntry(cpOption);
 	}
 	
+	/**
+	 * 获取系统运行时classpath，用户指定了就使用用户指定的
+	 * 用户未指定，当前目录下有jre文件夹只用当前路径
+	 * 当前路径也没有jre文件夹使用JAVA_HOME环境变量
+	 * 都没有抛出Can not find jre folder!
+	 * @param jreOption
+	 * @return
+	 * @throws Exception
+	 */
 	private String getJreDir(String jreOption) throws Exception {
 		if (jreOption != null && !"".equals(jreOption)) {
 			return jreOption;
@@ -48,6 +69,11 @@ public class Classpath {
 		throw new RuntimeException("Can not find jre folder!");
 	}
 	
+	/**
+	 * 判断文件夹是否存在
+	 * @param path
+	 * @return
+	 */
 	private boolean exist(String path) {
 		File file = new File(path);
 		if (!file.exists() || !file.isDirectory()) {

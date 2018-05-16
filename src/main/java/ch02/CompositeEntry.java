@@ -16,11 +16,11 @@ public class CompositeEntry implements Entry {
 	}
 	
 	public CompositeEntry(String pathList, boolean isWildcardEntry) {
-		if (isWildcardEntry) {
+		if (isWildcardEntry) { // *匹配的将路径下所有的.jar/zip结尾的文件使用ZipEntry获取classpath
 			String bashDir = pathList.substring(0, pathList.length() - 1); // 去除*
 			File file = new File(bashDir);
 			getBashDirEntry(file);
-		} else {
+		} else { // ;分隔的分隔后每个都做*匹配获取ZipEntry
 			String[] pathArray = pathList.split(PATH_LIST_SEPARATOR);
 			for (int i = 0; i < pathArray.length; i ++) {
 				Entry entry = EntryFactory.getEntry(pathArray[i]);
@@ -50,8 +50,10 @@ public class CompositeEntry implements Entry {
         }
     }  
 
-	@Override
-	public byte[] readClass(String className) throws Exception {
+    /**
+     * 遍历所有的Entry 每个里面都去匹配className
+     */
+    public byte[] readClass(String className) throws Exception {
 		for (Entry entry : entryList) {
 			byte[] data = entry.readClass(className);
 			if (data != null) {
