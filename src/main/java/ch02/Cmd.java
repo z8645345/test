@@ -43,9 +43,11 @@ public class Cmd {
 					i = 2;
 				}
 				this.clazz = args[i];
-				this.args = new String[args.length - (i + 1)];
-				for (int j = 0; j < this.args.length; j ++) {
-					this.args[j] = args[i + 1 + j];	
+				if (args.length > i + 1) {
+					this.args = new String[args.length - (i + 1)];
+					for (int j = 0; j < this.args.length; j ++) {
+						this.args[j] = args[i + 1 + j];	
+					}
 				}
 			}
 		}
@@ -57,10 +59,11 @@ public class Cmd {
 	
 	public void startJVM() {
 		StringBuffer argsStr = new StringBuffer();
-		for (String arg : this.args) {
-			argsStr.append(arg).append(", ");
+		if (this.args != null && this.args.length > 0) {
+			for (String arg : this.args) {
+				argsStr.append(arg).append(", ");
+			}
 		}
-		System.out.println("classpath:" + this.cpOption + " class:" + this.clazz + " xJreOption:" + this.xJreOption + " args:" +  argsStr.substring(0, argsStr.length() - 2));
 		try {
 			Classpath classpath = new Classpath(xJreOption, cpOption);
 			byte[] data = classpath.readClass(this.clazz);
