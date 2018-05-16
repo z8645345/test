@@ -73,7 +73,8 @@ public class Cmd {
 			// 1.获取所有Classpath
 			Classpath classpath = new Classpath(xJreOption, cpOption);
 			// 2.获取指定在所有Classpath中获取指定类型的数据
-			byte[] data = classpath.readClass(this.clazz);
+			String className = this.clazz.replace(".", "/");
+			byte[] data = classpath.readClass(className);
 			if (data == null) {
 				System.err.println("not found class: " + this.clazz);
 			} else {

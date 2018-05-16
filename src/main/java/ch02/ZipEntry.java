@@ -35,7 +35,7 @@ public class ZipEntry implements Entry {
 			while((ze=zin.getNextEntry())!=null){
 				if(ze.isDirectory()){
 				} else {
-					if (ze.getName().equals(className) || ze.getName().contains("/" + className)) {
+					if (ze.getName().equals(className)) {
 						try (InputStream is = zf.getInputStream(ze);
 								ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);) {
 							byte[] b = new byte[1000];  
