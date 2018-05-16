@@ -1,0 +1,26 @@
+运行Main的main方法
+执行流程：
+1.new Cmd的时候会解析所有输入参数，如果解析失败提示语法格式
+2.参数解析成功调用startJVM启动jvm
+3.new Classpath传入运行时环境classpath路径和用户指定的classpath路径
+4.parseBootAndExtClasspath设置bootClasspath和ExtClasspath
+5.如果xJreOption指定了 运行环境classpath使用用户指定的路径，如果未指定当前目录下有jre目录使用当前目录作为运行环境classpath，如果当前目录没有jre目录使用JAVA_HOME环境变量作为运行环境classpath
+6.将运行环境classpath下面的lib目录作为bootClasspath
+7.将运行环境classpath下面的lib/ext目录作为ExtClasspath
+8.parseUserClsspath设置userClasspath
+9.用户指定的cpOption路径作为userClasspath
+10.调用classpath的readClass获取指定class名的字节码
+11.先调用bootClasspath的readClass，没找到再调用ExtClasspath的readClass，没找到再调用userClasspath的readClass，还没找到就是没找到了
+
+Entry的获取方式
+根据参数创建不同类型的Entry
+如果多个路径使用;隔开使用CompositeEntry(path)（其中每个的都是*通配）
+如果使用*通配使用CompositeEntry(path)
+如果是.jar或者.zip结尾的使用ZipEntry(path)
+其他情况使用DirEntry(path)
+com.zengjia.test.*;com.zengjia.test1.* 使用CompositeEntry(path)
+com.zengjia.test.*使用CompositeEntry(path, true)
+com.zengjia.test.a.jar/a.zip使用ZipEntry(path)
+com.zengjia.test使用DirEntry(path)
+----------------------------------------------------------------------
+目前jvm还不能真正启动 但是已经能获取class字节码到内存了
