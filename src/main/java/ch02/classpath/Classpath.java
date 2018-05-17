@@ -1,6 +1,9 @@
-package ch02;
+package ch02.classpath;
 
 import java.io.File;
+
+import ch02.entry.Entry;
+import ch02.factory.EntryFactory;
 
 /**
  * 类加载路径

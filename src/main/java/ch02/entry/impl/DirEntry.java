@@ -1,8 +1,10 @@
-package ch02;
+package ch02.entry.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+
+import ch02.entry.Entry;
 
 /**
  * 目录形式的类路径

@@ -1,4 +1,7 @@
 package ch02;
+
+import ch02.classpath.Classpath;
+
 public class Cmd {
 	/** 是否显示帮助 */
 	private boolean helpFlag;

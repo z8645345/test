@@ -1,4 +1,9 @@
-package ch02;
+package ch02.factory;
+
+import ch02.entry.Entry;
+import ch02.entry.impl.CompositeEntry;
+import ch02.entry.impl.DirEntry;
+import ch02.entry.impl.ZipEntry;
 
 /**
  * EntryFactor工场

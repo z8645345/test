@@ -1,8 +1,11 @@
-package ch02;
+package ch02.entry.impl;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import ch02.entry.Entry;
+import ch02.factory.EntryFactory;
 
 /**
  * 由更小的Entry组成，表示成Entry[]

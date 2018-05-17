@@ -1,4 +1,4 @@
-package ch02;
+package ch02.entry.impl;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -7,6 +7,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
+
+import ch02.entry.Entry;
 
 /**
  * ZIP或JAR文件形式的类路径
